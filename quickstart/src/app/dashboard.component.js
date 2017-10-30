@@ -10,31 +10,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var hero_service_1 = require("./hero.service");
-var HeroListComponent = (function () {
-    function HeroListComponent(heroService) {
+var DashboardComponent = (function () {
+    function DashboardComponent(heroService) {
         this.heroService = heroService;
-        this.title = 'Hero List';
-        this.onSelect = function (hero) {
-            this.selectedHero = hero;
-        };
+        this.heroes = [];
+        this.title = "Top 3 Heroes";
     }
-    HeroListComponent.prototype.ngOnInit = function () {
+    DashboardComponent.prototype.ngOnInit = function () {
         this.getHeroes();
     };
-    HeroListComponent.prototype.getHeroes = function () {
+    DashboardComponent.prototype.getHeroes = function () {
         var _this = this;
-        this.heroService.getHeroesSlowly()
-            .then(function (heroes) { return _this.heroes = heroes; });
+        this.heroService.getHeroes()
+            .then(function (heroes) { return _this.heroes = heroes.slice(0, 3); });
     };
-    return HeroListComponent;
+    return DashboardComponent;
 }());
-HeroListComponent = __decorate([
+DashboardComponent = __decorate([
     core_1.Component({
-        selector: 'hero-list',
-        templateUrl: './hero-list.component.html',
-        styleUrls: ['./hero-list.component.css'],
+        selector: 'dashboard',
+        templateUrl: './dashboard.component.html',
+        styleUrls: ['./dashboard.component.css']
     }),
     __metadata("design:paramtypes", [hero_service_1.HeroService])
-], HeroListComponent);
-exports.HeroListComponent = HeroListComponent;
-//# sourceMappingURL=hero-list.component.js.map
+], DashboardComponent);
+exports.DashboardComponent = DashboardComponent;
+//# sourceMappingURL=dashboard.component.js.map
